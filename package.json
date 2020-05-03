@@ -1,0 +1,25 @@
+{
+  "name": "ap_car_model_make",
+  "version": "1.0.0",
+  "description": "service to download and view car makes and models",
+  "main": "servernpm insta.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^15.0.0",
+    "mongoose": "^5.9.11",
+    "node-cron": "^2.0.3",
+    "p-limit": "^2.3.0",
+    "xml2json": "^0.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
