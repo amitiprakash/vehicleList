@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "service to download and view car makes and models",
   "main": "servernpm insta.js",
+  "nodemonConfig": {
+    "ignore": ["*.json"]
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"

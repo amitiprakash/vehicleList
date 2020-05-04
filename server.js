@@ -38,4 +38,4 @@ app.listen(8000, () => {
 
 
 // Uncomment to get all the car model details when the app starts
-//const something = getAllCarModel();
+getAllCarModel();

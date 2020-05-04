@@ -4,6 +4,10 @@ Project starts at server.js
 
 need to add ip to whitelist to access mongodb
 
+
+Test graphql  at http://localhost:8000/graphql
+
+
 graphql query to fetch data
 
 {
@@ -20,3 +24,6 @@ graphql query to fetch data
     }
   }
 }
+
+
+method call to fetch data gets invoked at 1PM everyday( cron expression and code in fetchDataModule.js)

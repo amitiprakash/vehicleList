@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {parseData, limit} = require("./util");
+const {parseData, limit, readFile,writeFile, access} = require("./util");
 const cron = require("node-cron");
 
 const {createVehicles} = require("./mongoose/vehicle")
@@ -17,8 +17,9 @@ async function getAllCarModel(){
     await axios.get('https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=XML').then(res =>{
         const jsonResult = parseData(res.data);
         fetchRestOfData(jsonResult.Response.Results.AllVehicleMakes);
+    }).catch(err =>{
+        console.log(err);
     });
-    
 }
 
 const fetchRestOfData = (listOfcars) =>{
@@ -107,11 +108,26 @@ const prepareCarData = (carList, additionalData) =>{
         }
     });
 
-    console.log("running every 5 mins");
-
-    //make db call
+    checkForNewData(modifiedCarData);
+    //uncomment to save to db. Ensure the details are deleted before saving.(optimisation required)
     //const created = createVehicles(modifiedCarData);
 
+}
+
+checkForNewData = (jsonData) =>{
+   access('collectedData.json')
+        .then(res =>{
+            readFile('collectedData.json').then(res =>{
+                //TO DO : compare the JSON data with retrieved data and save new changes.
+            }).catch(err =>{
+                console.log(err);
+            });
+        })
+        .catch(err =>{
+            writeFile('collectedData.json',JSON.stringify(jsonData)).catch(err =>{console.log(err)});
+            //uncomment to save to db. Ensure the details are deleted before saving.(optimisation required)
+            //createVehicles(jsonData);
+        });
 }
 
 module.exports = {
